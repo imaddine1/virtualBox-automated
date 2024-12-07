@@ -1,0 +1,6 @@
+- name: ALL IN ONE
+  hosts: my_vms
+  become: yes
+  become_user: root
+  roles:
+    - setup
