@@ -7,7 +7,6 @@ Vagrant.configure("2") do |config|
   config.vm.define "imad"
   config.vm.hostname = "imaddine"
   config.vm.network "private_network", ip: "192.168.56.110"
-
   config.vm.provider "virtualbox" do |v|
     v.name = "cloud-vm"
     v.memory = 1024

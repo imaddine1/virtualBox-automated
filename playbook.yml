@@ -1,6 +1,6 @@
 - name: ALL IN ONE
   hosts: my_vms
-  become: yes
+  become: true
   become_user: root
   roles:
     - setup

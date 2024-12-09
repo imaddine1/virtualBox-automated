@@ -1,11 +1,11 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # tasks file for setup
-
 - name: Update and Upgrade apt packages
   apt:
-    update_cache: yes
+    update_cache: true
     upgrade: dist
+  ignore_errors: true
 
 - name: Install python 3
   apt:
@@ -21,4 +21,24 @@
   apt:
     name: docker-compose
     state: present
+- name: Create a directory for binding DB
+  file:
+    path: /etc/db
+    state: directory
+    mode: '0755'
+- name: Create a directory for binding Wordpress
+  file:
+    path: /etc/files
+    state: directory
+    mode: '0755'
+- name: Copy files to remote node
+  copy:
+    src: files/
+    dest: /home/application
+    mode: '0755'
+- name: run docker-compose
+  command: docker-compose up --build -d
+  args: 
+    chdir: /home/application
+
 
