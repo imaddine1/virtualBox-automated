@@ -30,13 +30,27 @@ services:
     image: wordpress:mytag
     restart: always
     volumes:
-      - Wordpress:/var/www/html/
+      - Wordpress:/var/www/wordpress
+    networks:
+      - app-network
+    
+  phpmyadmin:
+    depends_on:
+      - db
+    env_file:
+      - .env
+    image: phpmyadmin:fpm
+    container_name: phpmyadmin-cont
+    restart: always
+    volumes:
+      - PhpMyAdmin:/var/www/html
     networks:
       - app-network
 
   nginx:
     depends_on:
       - wordpress
+      - phpmyadmin
     build: ./nginx/.
     container_name: nginx-cont
     image: nginx:mytag
@@ -44,9 +58,12 @@ services:
       - "80:80"
     restart: always
     volumes:
-      - Wordpress:/var/www/html/
+      - Wordpress:/var/www/wordpress
+      - PhpMyAdmin:/var/www/html
     networks:
       - app-network
+  
+
 
 volumes:
   Wordpress:
@@ -61,6 +78,12 @@ volumes:
       type: none
       o: bind
       device: /etc/db
+  PhpMyAdmin:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /etc/phpmyadmin
   
 networks:
   app-network:

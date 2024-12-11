@@ -31,11 +31,18 @@
     path: /etc/files
     state: directory
     mode: '0755'
+- name: Create a directory for binding PhpMyAdmin
+  file: 
+    path: /etc/phpmyadmin
+    state: directory
+    mode: '0755'
+
 - name: Copy files to remote node
   copy:
     src: files/
     dest: /home/application
     mode: '0755'
+  
 - name: run docker-compose
   command: docker-compose up --build -d
   args: 
