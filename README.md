@@ -53,5 +53,6 @@ It's your turn to experiment with Ansible by modifying the playbook.yml and setu
 - Use groups of inventory
 
 ## What You Can Fix:
-`After gaining some basic knowledge of Ansible, you might notice that idempotency is not working well in this playbook. As a challenge, can you fix it using the appropriate components ??`
+`After gaining some basic knowledge of Ansible, you might notice that idempotency is not working well in this playbook. As a challenge, can you fix it using the appropriate components ?? and i am waiting from you to use handlers to avoid docker-compose run after every call ansible-playbook command`
+-
   
